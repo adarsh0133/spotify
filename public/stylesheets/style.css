@@ -1,0 +1,260 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'gilroy';
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+a{
+  text-decoration: none;
+}
+
+h4{
+  color: #fff;
+}
+
+#main{
+  width: 100%;
+  height: 100vh;
+  background-color: #000000;
+}
+
+#top{
+  width: 100%;
+  height: 89vh;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px;
+  display: flex;
+}
+
+#top-lft{
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#top-rgt{
+  width: 75%;
+  height: 100%;
+  /* overflow: hidden; */
+  position: relative;
+  background-color: #121212;
+}
+
+#nav-bar{
+  width: 74%;
+  height: 70px;
+  background-color: #121212;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+#nav-bar a{
+  color: #fff;
+}
+
+#nav-bar i{
+  margin-left: 10px;
+  font-size: 20px;
+  background-color: red;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+#songs{
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  padding-top: 70px;
+  overflow: auto;
+}
+
+#songs h2{
+  color: #fff;
+}
+
+
+#top-lft-top{
+  width: 100%;
+  height: 20%;
+  background-color: #121212;
+  border-radius: 5px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#top-lft-top i{
+   color: #fff;
+   font-size: 25px;
+}
+
+.a a{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: #fff;
+}
+
+#top-lft-btm{
+  width: 100%;
+  height: 79%;
+  background-color: #121212;
+  border-radius: 5px;
+}
+
+#bottom{
+  padding: 0 30px;
+  width: 100%;
+  height: 11vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  background-color: #282828;
+}
+
+.card{
+  width: 22vh;
+  height: 32vh;
+  background-color: #090909;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 20px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.card h4,p{
+  margin-top: 8px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card:hover{
+  background-color: #272727;
+}
+
+#card-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card img{
+  width: 100%;
+  height: 130px;
+}
+
+.card #playbtn{
+  position: absolute;
+  top: 54%;
+  left: 70%;
+  transform: translate(-50%,-50%);
+  transition: all ease-in-out .3s;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+#playbtn i{
+  color: #000000;
+  padding: 10px;
+  font-size: 25px;
+  border-radius: 50%;
+  background-color: #1FDF64;
+}
+
+.card:hover #playbtn{
+  opacity: 1;
+  top: 50%;
+}
+
+#currentsong{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+#song_image>img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#song_image{
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
+}
+
+#currentsong>svg{
+  width: 25px;
+  fill: #fff;
+}
+
+/* audio container  */
+
+
+.audio-container {
+  position: relative;
+  width: 70vh;
+}
+
+.custom-audio {
+  width: 100%;
+  appearance: none;
+  background-color: #212121; /* Spotify player background color */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  outline: none;
+}
+
+.custom-audio::-webkit-media-controls-panel {
+  background-color: #fff; /* Adjust for Safari */
+  border-radius: 5px;
+}
+
+.custom-audio::-webkit-media-controls-timeline {
+  background-color: #fff; /* Adjust for Safari */
+  border-radius: 5px;
+}
+
+.custom-audio::-webkit-media-controls-play-button,
+.custom-audio::-webkit-media-controls-mute-button {
+  color: #1db954; /* Spotify green color */
+}
+
+.custom-audio::-webkit-media-controls-volume-slider {
+  color: #1db954;
+}
+
+.custom-audio::-webkit-media-controls-current-time-display,
+.custom-audio::-webkit-media-controls-time-remaining-display {
+  color: #212121;
+}
+
+.custom-audio::-webkit-media-controls-seek-back-button,
+.custom-audio::-webkit-media-controls-seek-forward-button {
+  color: #1db954; /* Spotify green color */
+}

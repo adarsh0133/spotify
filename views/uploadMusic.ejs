@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/admin.css">
+</head>
+<body>
+  <input type="radio" name="optionScreen" id="SignIn" hidden checked>
+<input type="radio" name="optionScreen" id="SignUp" hidden>
+
+<section>
+	<div id="logo">
+		<img src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png" alt="Spotify-Logo" width="50">
+		<h2>Spotify</h2>
+	</div>
+  <h1>Admin Panel</h1> 
+  <p>Streamline song uploads with enhanced management capabilities.</p>
+  <form action="/songUpload" id="songsubmit" method="post" enctype="multipart/form-data">
+    <input type="file" id="upload_song" name="song" multiple>
+  </form>
+  <button id="submit">upload song</button>
+</section>
+<script>
+  var songinp = document.querySelector("#upload_song");
+  var submit = document.querySelector("#submit");
+
+  submit.addEventListener("click", () => {
+      document.querySelector("#upload_song").click();
+    });
+
+  songinp.addEventListener("change", () => {
+      document.querySelector("#songsubmit").submit();
+    });
+
+</script>
+</body>
+</html>
