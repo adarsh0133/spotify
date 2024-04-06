@@ -14,7 +14,7 @@ passport.use(new localStrategy(userModel.authenticate()));
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://0.0.0.0/spt-15")
+  .connect(process.env.DATA_BASE)
   .then(() => {
     console.log("connected");
   })
