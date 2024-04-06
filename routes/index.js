@@ -72,57 +72,48 @@ router.get("/poster/:posterId", (req, res, next) => {
   stream.pipe(res);
 });
 
-// router.get("/stream", async (req, res, next) => {
-//   const currentSong = await songModel.findOne({
-//     filename: "684173adb572932ecfd74244d4e3b5aba3b267ef",
-//   });
-
-//   console.log(currentSong);
-
-//     const stream = gfsBucket.openDownloadStreamByName("684173adb572932ecfd74244d4e3b5aba3b267ef");
-
-//     res.set("Content-Type", "audio/mpeg");
-//     res.set("Content-Length", currentSong.size + 1);
-//     res.set("Content-Range",` bytes ${0} - ${currentSong.size - 1}/ ${currentSong.size}`);
-//     res.set("Content-Ranges", "byte");
-//     res.status(206);
-
-//     stream.pipe(res);
-// });
-
 router.get("/stream/:musicName", async (req, res, next) => {
-  const currentSong = await songModel.findOne({
-    filename: req.params.musicName,
-  });
-
-  const range = req.headers.range;
-
-  if (range && currentSong) {
-    const parts = range.replace(/bytes=/, "").split("-");
-    const start = parseInt(parts[0], 10);
-    const end = parts[1] ? parseInt(parts[1], 10) : currentSong.size - 1;
-
-    const contentLength = end - start + 1;
-    const contentRange = `bytes ${start}-${end}/${currentSong.size}`;
-
-    res.status(206);
-    res.set("Content-Type", "audio/mpeg");
-    res.set("Content-Length", contentLength);
-    res.set("Content-Range", contentRange);
-
-    const stream = gfsBucket.openDownloadStreamByName(req.params.musicName, {
-      start, // Start byte position
-      end, // End byte position
+  try {
+    const currentSong = await songModel.findOne({
+      filename: req.params.musicName,
     });
 
-    stream.pipe(res);
-  } else {
-    res.status(200); // Set status to 200 for a full content response
-    res.set("Content-Type", "audio/mpeg");
-    res.set("Content-Length", currentSong.size);
+    if (!currentSong) {
+      return res.status(404).send("Song not found");
+    }
 
-    const fullStream = gfsBucket.openDownloadStreamByName(req.params.musicName);
-    fullStream.pipe(res);
+    const range = req.headers.range;
+
+    if (range) {
+      const parts = range.replace(/bytes=/, "").split("-");
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : currentSong.size - 1;
+
+      const contentLength = end - start + 1;
+      const contentRange = `bytes ${start}-${end}/${currentSong.size}`;
+
+      res.status(206);
+      res.set("Content-Type", "audio/mpeg");
+      res.set("Content-Length", contentLength);
+      res.set("Content-Range", contentRange);
+
+      const stream = gfsBucket.openDownloadStreamByName(req.params.musicName, {
+        start, // Start byte position
+        end, // End byte position
+      });
+
+      stream.pipe(res);
+    } else {
+      res.status(200); // Set status to 200 for a full content response
+      res.set("Content-Type", "audio/mpeg");
+      res.set("Content-Length", currentSong.size);
+
+      const fullStream = gfsBucket.openDownloadStreamByName(req.params.musicName);
+      fullStream.pipe(res);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
